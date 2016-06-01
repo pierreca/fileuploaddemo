@@ -1,0 +1,16 @@
+{
+  "name": "nodecam",
+  "version": "0.0.1",
+  "description": "Raspberry Pi Camera triggered using Azure IoT Hub",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pierre Cauchois",
+  "license": "MIT",
+  "dependencies": {
+    "azure-iot-device": "^1.0.6",
+    "azure-iot-device-amqp": "^1.0.6",
+    "raspicam": "^0.2.13"
+  }
+}
