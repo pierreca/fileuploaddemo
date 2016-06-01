@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      #shutter { background-color: #009900; padding: 2em; margin-left:auto;margin-right:auto; text-align: center}
+      #shutter p { font: 22px Helvetica, Arial; color: white}
+      img {display:block; margin-left:auto; margin-right: auto; margin-top: 2em}
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+  </head>
+  
+  <body>
+    <div style="display:table;width:100%;height:100%;">
+      <div style="display:table-cell;vertical-align:middle;">
+        <div id="shutter">
+          <p>Take Picture</p>
+        </div>
+      </div>
+    </div>
+    <img id='latestimg' />
+    <script>
+      var socket = io();
+      $('#shutter').click(function(){
+        socket.emit('takePicture', 'rpicam');
+      });
+
+      socket.on('fileNotification', function(msg){
+        console.log('Received new picture URL: ' + msg);
+        var _img = document.getElementById('latestimg');
+        var newImg = new Image;
+        newImg.onload = function() {
+            _img.src = this.src;
+        }
+        newImg.src = msg;
+      });
+    </script>
+  </body>
+</html>
